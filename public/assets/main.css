@@ -11,18 +11,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 .table {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 .table-cells{
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
-    width: 200px;
+    width: 400px;
 }
 .cell {
     width: 50px;
@@ -32,12 +34,12 @@
     justify-content: center;
     align-items: center;
 }
-.cell:nth-child(odd) {
+/* .cell:nth-child(odd) {
     background-color: #F2CEA7;
 }
 .cell:nth-child(even) {
     background-color: #AE572D;
-}
+} */
 .chessman{
     position: absolute;
     width: 35px;
