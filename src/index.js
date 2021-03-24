@@ -72,11 +72,31 @@ console.log(tableCoords);
 //     y: [1,2,3,4]
 // }
 
-class Figure {
-    constructor(cell){
+// class Figure {
+//     constructor(cell){
+//         this.cell = cell;
+//         // this.x = x;
+//         // this.y = y;
+//     }
+//     draw(name){
+//         let coordObj = tableCoords[`${this.cell}`];
+
+//         let elem = document.createElement("div");
+//         elem.classList.add('chessman');
+
+//         elem.innerHTML = `<img class="chessman-img" src="./assets/chessmen/${name}.svg" alt="">`;
+//         elem.style.left = `${coordObj.x+(coordObj.width-35)/2}px`;
+//         elem.style.top =`${coordObj.y+(coordObj.width-35)/2}px`;
+//         chessmenContainer.append(elem);
+//     }
+//     move(){
+//         console.log('move');
+//     }
+// }
+class ChessMan{
+    constructor(cell,name){
         this.cell = cell;
-        // this.x = x;
-        // this.y = y;
+        this.go = 50;
     }
     draw(name){
         let coordObj = tableCoords[`${this.cell}`];
@@ -87,10 +107,91 @@ class Figure {
         elem.innerHTML = `<img class="chessman-img" src="./assets/chessmen/${name}.svg" alt="">`;
         elem.style.left = `${coordObj.x+(coordObj.width-35)/2}px`;
         elem.style.top =`${coordObj.y+(coordObj.width-35)/2}px`;
+        elem.addEventListener('click',(e)=>{
+            this.move(elem);
+        });
         chessmenContainer.append(elem);
+    }
+    move(elem){
+        let currY = window.getComputedStyle(elem).top.split('px')[0];
+        elem.style.top = `${Number(currY)-this.go}px`;
+        console.log(currY);
+    }
+}
+
+class Pawn extends ChessMan{
+    constructor(...figure){
+        super(figure);
+    }
+    // move(){
+    //     console.log('move');
+    // }
+}
+
+class Knight extends ChessMan{
+    constructor(figure){
+        super(figure);
     }
     move(){
         console.log('move');
+    }
+}
+
+class Bishop extends ChessMan{
+    constructor(figure){
+        super(figure);
+    }
+    move(){
+        console.log('move');
+    }
+}
+
+class Rook extends ChessMan{
+    constructor(figure){
+        super(figure);
+    }
+    move(){
+        console.log('move');
+    }
+}
+
+class King extends ChessMan{
+    constructor(figure){
+        super(figure);
+    }
+    move(){
+        console.log('move');
+    }
+}
+
+class Queen extends ChessMan{
+    constructor(figure){
+        super(figure);
+    }
+    move(){
+        console.log('move');
+    }
+}
+
+
+function Figure(figure){
+    if (figure.name == 'pawn') {
+        new Pawn(figure.cell).draw(figure.name);
+    }
+    if (figure.name == 'knight') {
+        new Knight(figure.cell).draw(figure.name);
+    }
+    if (figure.name == 'bishop') {
+        new Bishop(figure.cell).draw(figure.name);
+    }
+    if (figure.name == 'rook') {
+        new Rook(figure.cell).draw(figure.name);
+    }
+    if (figure.name == 'king') {
+        new King(figure.cell).draw(figure.name);
+    }
+    if (figure.name == 'queen') {
+        new Queen(figure.cell).draw(figure.name);
     }
 }
 
@@ -165,7 +266,8 @@ class Table {
     }
     init(){
         this.whitePos.forEach(function(figure){
-            new Figure(figure.cell).draw(figure.name);
+            Figure(figure);
+            // new Figure(figure.cell).draw(figure.name);
         });
     }
 }
